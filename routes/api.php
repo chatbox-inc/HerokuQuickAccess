@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use HerokuClient\Client as HerokuClient;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +16,13 @@ use Illuminate\Http\Request;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::get('app',function(){
+    $heroku = new HerokuClient([
+        'apiKey' => env('HEROKU_API_KEYS')
+    ]);
+
+    $applist = $heroku->get('apps');
+    return json_encode($applist);
 });
