@@ -5,7 +5,7 @@
 ````
 $ composer install
 $ npm i
-$ npm run dev
+$ npm run watch
 ````
 herokuクライアントを使用し、tokenを取得する
 
