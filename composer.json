@@ -10,6 +10,9 @@
         "laravel/tinker": "~1.0",
         "php-heroku-client/php-heroku-client": "^1.2"
     },
+    "provide":{
+        "ext-curl":"*"
+    },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",

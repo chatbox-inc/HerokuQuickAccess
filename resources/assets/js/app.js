@@ -16,6 +16,14 @@ window.Vue = require('vue');
  */
 
 Vue.component('example', require('./components/Example.vue'));
+Vue.component('app', require('./components/App.vue'));
+Vue.component('search-menu', require('./components/Search/SearchMenu.vue'));
+    Vue.component('select-org', require('./components/Search/SelectOrg.vue'));
+    Vue.component('select-stage', require('./components/Search/SelectStage.vue'));
+    Vue.component('select-tag', require('./components/Search/SelectTag.vue'));
+Vue.component('app-list', require('./components/AppList.vue'));
+    Vue.component('in-apps', require('./components/InApp.vue'));
+
 
 const app = new Vue({
     el: '#app'
