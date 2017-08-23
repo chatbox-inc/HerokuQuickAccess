@@ -11,6 +11,16 @@
 |
 */
 
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+
 Route::get('/', function () {
     return view('test');
 });
+Route::get('heroku',function(){
+
+});
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

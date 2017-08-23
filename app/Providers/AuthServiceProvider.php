@@ -25,6 +25,13 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        $this->app->extend("auth", function (AuthManager $auth) {
+            $auth->extend("simple-session", function ($app, $name, $config) {
+                return app(SimpleSessionGuard::class);
+            });
+            return $auth;
+        });
+
         //
     }
 }
