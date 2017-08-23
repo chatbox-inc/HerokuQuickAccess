@@ -2,10 +2,11 @@
 
 ## 構築方法
 
-`composer install`
-`npm i`
-`npm run dev`
-
+````
+$ composer install
+$ npm i
+$ npm run dev
+````
 herokuクライアントを使用し、tokenを取得する
 
 `heroku auth:token`
