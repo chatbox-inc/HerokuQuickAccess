@@ -13,7 +13,11 @@ class CreateTagmapTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('m_tagmap', function (Blueprint $table) {
+            $table->increments("id");
+            $table->integer("tag_id");
+            $table->string("app_id");
+        });
     }
 
     /**
@@ -23,6 +27,6 @@ class CreateTagmapTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('m_tagmap');
     }
 }

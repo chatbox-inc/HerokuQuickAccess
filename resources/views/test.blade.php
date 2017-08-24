@@ -14,7 +14,7 @@
 <body>
 <div id="app">
     <p v-for="aaaaa in message">
-        @{{ aaaaa.name }}
+        @{{ aaaaa }}
     </p>
 </div>
 {{Auth::guard()->user()}}

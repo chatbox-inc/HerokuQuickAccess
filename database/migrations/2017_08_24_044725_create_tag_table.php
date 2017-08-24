@@ -13,7 +13,11 @@ class CreateTagTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('m_tag', function (Blueprint $table) {
+            $table->increments("id");
+            $table->string("heroku_id");
+            $table->string('name');
+        });
     }
 
     /**
@@ -23,6 +27,6 @@ class CreateTagTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('m_tag');
     }
 }
