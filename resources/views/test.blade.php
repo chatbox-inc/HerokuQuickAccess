@@ -17,6 +17,7 @@
         @{{ aaaaa.name }}
     </p>
 </div>
+{{Auth::guard()->user()}}
 <script>
     aaa = null;
     $.get("/api/app",function(data){

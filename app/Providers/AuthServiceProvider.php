@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Http\SimpleSessionGuard;
+use Illuminate\Auth\AuthManager;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
