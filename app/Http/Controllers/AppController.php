@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AppEloquent;
+use App\Service\HerokuApi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -43,6 +44,17 @@ class AppController extends Controller
                 $app_db->save();
             }
             return abort(200);
+        } else {
+            return abort(401);
+        }
+    }
+
+    public function raw(){
+        if (Auth::check()) {
+            $user = Auth::guard()->user();
+            $heroku = new HerokuApi($user->access_token, $user->token_type);
+            $app = $heroku->app();
+            return $app;
         } else {
             return abort(401);
         }
