@@ -1,7 +1,10 @@
 <?php
 
+use App\Models\AppEloquent;
+use App\Service\HerokuApi;
 use Illuminate\Http\Request;
-use HerokuClient\Client as HerokuClient;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,11 +21,34 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('app',function(){
-    $heroku = new HerokuClient([
-        'apiKey' => env('HEROKU_API_KEYS')
-    ]);
+Route::get('app', function () {
+    if($user = Auth::guard()->user()){
+        $app = AppEloquent::where("heroku_id",$user->heroku_id)->get();
+        return $app->toArray();
+    }
+    else{
+        return abort(401);
+    }
+});
 
-    $applist = $heroku->get('apps');
-    return json_encode($applist);
+Route::get('app/refresh', function () {
+    if (Auth::check()) {
+        $user = Auth::guard()->user();
+        $heroku = new HerokuApi($user->access_token, $user->token_type);
+        $app = $heroku->app();
+        foreach ($app as $app_data) {
+            $app_db = AppEloquent::find($app_data->id);
+            if (!$app_db) {
+                $app_db = new AppEloquent();
+            }
+            $app_db->id         = $app_data->id;
+            $app_db->heroku_id  = $user->heroku_id;
+            $app_db->name       = $app_data->name;
+            $app_db->web_url    = $app_data->web_url;
+            $app_db->save();
+        }
+        return abort(200);
+    } else {
+        return abort(401);
+    }
 });
