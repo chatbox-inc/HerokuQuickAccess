@@ -23,3 +23,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('app',\App\Http\Controllers\AppController::class."@index");
 Route::get('app/refresh',\App\Http\Controllers\AppController::class."@refresh");
+
+Route::get('tag',\App\Http\Controllers\TagController::class."@index");
+Route::post('tag',\App\Http\Controllers\TagController::class."@store");
+Route::delete('tag/{id}',\App\Http\Controllers\TagController::class."@destroy");
+Route::patch('tag/{id}',\App\Http\Controllers\TagController::class."@update");
