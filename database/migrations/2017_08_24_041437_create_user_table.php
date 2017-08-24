@@ -16,6 +16,9 @@ class CreateUserTable extends Migration
         Schema::create('m_user', function (Blueprint $table) {
             $table->increments("id");
             $table->string('heroku_id');
+            $table->string('access_token');
+            $table->string('refresh_token');
+            $table->string('token_type');
             $table->timestamps();
         });
     }

@@ -17,8 +17,8 @@ class CreateAppTable extends Migration
             $table->string("id")->primary();
             $table->string("heroku_id");
             $table->string('name');
-            $table->dateTime('updated_at');
             $table->string("web_url");
+            $table->timestamps();
         });
     }
 
