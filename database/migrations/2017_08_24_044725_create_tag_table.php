@@ -17,6 +17,7 @@ class CreateTagTable extends Migration
             $table->increments("id");
             $table->string("heroku_id");
             $table->string('name');
+            $table->timestamps();
         });
     }
 
