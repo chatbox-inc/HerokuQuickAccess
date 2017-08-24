@@ -17,11 +17,16 @@
         @{{ aaaaa }}
     </p>
 </div>
-{{Auth::guard()->user()}}
+@if(Auth::check())
+    <h2>ログインされています</h2>
+@else
+    <h2>ログインされていません</h2>
+@endif
+
 <script>
     aaa = null;
     $.get("/api/app",function(data){
-        aaa = JSON.parse(data);
+        aaa = data;
         var app = new Vue({
             el: '#app',
             data: {
@@ -30,6 +35,10 @@
         })
     });
 </script>
-<a href="https://id.heroku.com/oauth/authorize?client_id=a43bbce3-6106-4f40-a43d-81aa96458c40&response_type=code">heroku!!!!!!!</a>
+@if(Auth::check())
+    <a href="/logout">ここでログアウトします</a>
+@else
+    <a href="https://id.heroku.com/oauth/authorize?client_id=a43bbce3-6106-4f40-a43d-81aa96458c40&response_type=code">ここをおしてログインします</a>
+@endif
 </body>
 </html>
