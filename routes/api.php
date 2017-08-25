@@ -1,7 +1,10 @@
 <?php
 
+use App\Models\AppEloquent;
+use App\Service\HerokuApi;
 use Illuminate\Http\Request;
-use HerokuClient\Client as HerokuClient;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,11 +21,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('app',function(){
-    $heroku = new HerokuClient([
-        'apiKey' => env('HEROKU_API_KEYS')
-    ]);
+Route::get('app',AppController::class."@index");
+Route::get('app/refresh',AppController::class."@refresh");
+Route::get('app/raw',AppController::class."@raw");
 
-    $applist = $heroku->get('apps');
-    return json_encode($applist);
-});
+
+Route::get('tag',\App\Http\Controllers\TagController::class."@index");
+Route::post('tag',\App\Http\Controllers\TagController::class."@store");
+Route::delete('tag/{id}',\App\Http\Controllers\TagController::class."@destroy");
+Route::patch('tag/{id}',\App\Http\Controllers\TagController::class."@update");
