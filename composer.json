@@ -12,6 +12,9 @@
         "php-heroku-client/php-heroku-client": "^1.2",
         "stevenmaguire/oauth2-heroku": "^2.0"
     },
+    "provide":{
+        "ext-curl":"*"
+    },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
